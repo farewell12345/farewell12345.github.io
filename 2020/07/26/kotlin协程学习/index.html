@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="伞"><meta name="copyright" content="伞"><meta name="generator" content="Hexo 4.2.0"><meta name="theme" content="hexo-theme-yun"><title>kotlin协程学习 | 伞のBlog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="none" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.19/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_stqaphw3j4.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: "$$", right: "$$", display: true},
+      {left: "$", right: "$", display: false},
+      {left: "\\(", right: "\\)", display: false},
+      {left: "\\[", right: "\\]", display: true}
+    ]
+  });
+});</script><link class="aplayer-style-marker" rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.css"><script class="aplayer-script-marker" src="https://cdn.jsdelivr.net/npm/aplayer@latest/dist/APlayer.min.js" defer></script><script class="meting-script-marker" src="https://cdn.jsdelivr.net/npm/meting@1/dist/Meting.min.js" defer></script><link rel="shortcut icon" type="image/svg+xml" href="/farewell12345.github.io/yun.ico"><link rel="mask-icon" href="/farewell12345.github.io/yun.ico" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/farewell12345.github.io/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/farewell12345.github.io/js/utils.js" as="script"><link rel="preload" href="/farewell12345.github.io/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/farewell12345.github.io/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/farewell12345.github.io/css/hexo-theme-yun.css"><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"root":"/farewell12345.github.io/","title":"伞菌の小站","version":"0.9.6","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><meta name="description" content="协程也叫微线程，但需要注意的是，协程与多线程不同，协程是建立在单个线程上的.  特点：协程是由程序自身所管理控制，而非操作系统内核所控制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kotlin协程学习">
+<meta property="og:url" content="https://farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="伞のBlog">
+<meta property="og:description" content="协程也叫微线程，但需要注意的是，协程与多线程不同，协程是建立在单个线程上的.  特点：协程是由程序自身所管理控制，而非操作系统内核所控制。">
+<meta property="og:image" content="https://farewell12345.github.io/farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/%E5%8D%8F%E7%A8%8B1.jpeg">
+<meta property="article:published_time" content="2020-07-26T12:56:23.000Z">
+<meta property="article:modified_time" content="2020-07-26T17:38:43.657Z">
+<meta property="article:author" content="伞">
+<meta property="article:tag" content="kotlin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://farewell12345.github.io/farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/%E5%8D%8F%E7%A8%8B1.jpeg"><script src="/farewell12345.github.io/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/farewell12345.github.io/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/farewell12345.github.io/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info mickey-mouse"><a class="site-author-avatar" href="/farewell12345.github.io/about/" title="伞"><img width="96" loading="lazy" src="/farewell12345.github.io/HEAD.png" alt="伞"></a><div class="site-author-name"><a href="/farewell12345.github.io/about/">伞</a></div><a class="site-name" href="/farewell12345.github.io/about/site.html">伞のBlog</a><sub class="site-subtitle">一只咸鱼的摸鱼踩坑记录</sub><div class="site-desciption">一只咸鱼的学习记录</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/farewell12345.github.io/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/farewell12345.github.io/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">16</span></a></div><div class="site-state-item"><a href="/farewell12345.github.io/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/farewell12345.github.io/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">9</span></a></div></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/farewell12345" title="GitHub" target="_blank" style="color:#6e5494"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=444941332" title="网易云音乐" target="_blank" style="color:#C20C0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/39062268" title="哔哩哔哩" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="1149558764@qq.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/farewell12345.github.io/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#协程"><span class="toc-number">1.</span> <span class="toc-text">协程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下面来学习如何在Kotlin中使用协程进行并发操作"><span class="toc-number">1.0.1.</span> <span class="toc-text">下面来学习如何在Kotlin中使用协程进行并发操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建协程——coroutines"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">创建协程——coroutines</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#带返回值的协程——GlobalScope-async"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">带返回值的协程——GlobalScope.async</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#runBlocking——阻塞当前线程的协程"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">runBlocking——阻塞当前线程的协程</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div class="tag-cloud"><div class="tag-cloud-tags"><a href="/farewell12345.github.io/tags/c/" style="font-size: 30px; color: #0078e7">c++</a> <a href="/farewell12345.github.io/tags/kotlin/" style="font-size: 16.5px; color: #7391ad">kotlin</a> <a href="/farewell12345.github.io/tags/leetcode/" style="font-size: 21px; color: #4d89c0">leetcode</a> <a href="/farewell12345.github.io/tags/python/" style="font-size: 12px; color: #999">python</a> <a href="/farewell12345.github.io/tags/web/" style="font-size: 12px; color: #999">web</a> <a href="/farewell12345.github.io/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 12px; color: #999">后端开发</a> <a href="/farewell12345.github.io/tags/%E5%A5%B3%E6%9C%8B%E5%8F%8B%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 12px; color: #999">女朋友生成器</a> <a href="/farewell12345.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 25.5px; color: #2680d4">数据结构</a> <a href="/farewell12345.github.io/tags/%E7%AE%97%E6%B3%95/" style="font-size: 30px; color: #0078e7">算法</a></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://farewell12345.github.io/farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="伞"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="伞のBlog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">kotlin协程学习</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <span class="post-meta-icon-text">Posted on</span> <time title="Created: 2020-07-26 20:56:23" itemprop="dateCreated datePublished" datetime="2020-07-26T20:56:23+08:00">2020-07-26</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <span class="post-meta-icon-text">Edited on</span> <time title="Modified: 2020-07-27 01:38:43" itemprop="dateModified" datetime="2020-07-27T01:38:43+08:00">2020-07-27</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="Words count in article"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="Words count in article">1.2k</span><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="Reading time"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-timer-line"></use></svg></span> <span title="Reading time">4m</span></span></span><span class="post-busuanzi"><span class="post-meta-divider">-</span><span class="post-meta-item-icon" title="Views"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-eye-line"></use></svg> <span id="busuanzi_value_page_pv"></span></span></span><div class="post-classify"><span class="post-tag"><a class="tag" href="/farewell12345.github.io/tags/kotlin/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">kotlin</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>也叫微线程，但需要注意的是，<strong>协程与多线程不同</strong>，协程是建立在<strong>单个线程上</strong>的.</p>
+<blockquote>
+<p>特点：协程是由程序自身所管理控制，而非操作系统内核所控制。</p>
+</blockquote>
+<a id="more"></a>
+
+<p>下面这张图很好地说明了协程与线程的关系</p>
+<p><img src="/farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/%E5%8D%8F%E7%A8%8B1.jpeg" alt="img"></p>
+<blockquote>
+<p><strong>解释：</strong>如果有一定编程基础，那么应该知道，多线程是靠操作系统内核进行管理，通过切片的方式来切换线程间的执行。在多线程执行时，往往会涉及到同步锁，线程阻塞状态、可运行状态之间的切换、线程上下文的切换，不管以上哪一点，都是非常耗时的操作，因此我们将单一线程拆分为多个协程，并发工作，省去了多线程切换的性能和时间损耗，大幅提升高并发性能</p>
+<p>缺点：<strong>本质上还是单线程，无法利用单个CPU的多个核心</strong>，但是可以通过多线程嵌套协程的方式解决这个问题</p>
+</blockquote>
+<p><strong>总结：</strong></p>
+<blockquote>
+<ul>
+<li>一个进程包含多个线程，一个线程可以包含多个协程，<strong>协程基于单个线程</strong></li>
+<li>协程是跑在线程上的，一个线程可以同时跑多个协程</li>
+<li>协程是在程序层面进行任务切换的，而多线程是在操作系统内核层面进行切换的</li>
+<li>协程可以提高并发性能</li>
+<li>可以人为控制协程的挂起与运行</li>
+</ul>
+</blockquote>
+<h3 id="下面来学习如何在Kotlin中使用协程进行并发操作"><a href="#下面来学习如何在Kotlin中使用协程进行并发操作" class="headerlink" title="下面来学习如何在Kotlin中使用协程进行并发操作"></a>下面来学习如何在Kotlin中使用协程进行并发操作</h3><ul>
+<li><h4 id="创建协程——coroutines"><a href="#创建协程——coroutines" class="headerlink" title="创建协程——coroutines"></a><strong>创建协程——coroutines</strong></h4><p>首先导入</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlinx.coroutines.*</span><br></pre></td></tr></table></figure>
+
+<p>然后使用GlobalScope类中的launch函数创建一个协程</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GlobalScope.launch(Dispatchers.Unconfined) &#123;</span><br><span class="line">     print(<span class="string">"World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们来详细看一下launch函数</p>
+<p>launch函数有3个参数和一个返回值</p>
+<p>我们先来看参数：</p>
+<ul>
+<li><p>​    第一个参数是协程的上下文——<strong>CoroutineContext</strong>:</p>
+<p>​    我们可以设置CoroutineDispatcher 协程运行的线程调度器，可以指定协程运行在哪个线程，有 4种线程模式：</p>
+<blockquote>
+<ol>
+<li>Dispatchers.Default——默认模式，可有可无</li>
+<li>Dispatchers.IO -指定协程运行在共享的线程池中</li>
+<li>Dispatchers.Main - 主线程</li>
+<li>Dispatchers.Unconfined - 没指定，就是在当前线程</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>我们可以自己创建协程的上下文，也就是 <strong>线程池</strong></p>
+</blockquote>
+<blockquote>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> signgle= newSingleThreadContext(<span class="string">"aa"</span>)<span class="comment">//创建单线程</span></span><br><span class="line">    GlobalScope.launch(signgle) &#123;</span><br><span class="line">        delay(<span class="number">500L</span>)</span><br><span class="line">        print(<span class="string">"World!"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">val</span> signgles= newFixedThreadPoolContext(<span class="number">2</span>,<span class="string">"nn"</span>)<span class="comment">//创建线程池</span></span><br><span class="line">    GlobalScope.launch(signgles) &#123;</span><br><span class="line">        Fun2()</span><br><span class="line">        Fun1()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>CoroutineStart——启动模式</p>
+<p>​    也就是选择创建后就立即启动协程还是懒惰等待，等调用的时候再启动</p>
+<p>模式：</p>
+<blockquote>
+<p>1.DEAFAULT -默认，创建就启动</p>
+<p>2.LAZY，懒惰加载，也就是等到调用的时候再启动</p>
+<p>来看个lazy启动的示例:</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> job:Job=GlobalScope.launch(start = CoroutineStart.LAZY) &#123;</span><br><span class="line">        print(<span class="string">"World!"</span>)</span><br><span class="line">&#125;</span><br><span class="line">print(<span class="string">"hello"</span>)</span><br><span class="line">job.start()<span class="comment">//手动启动协程</span></span><br><span class="line">Thread.sleep(<span class="number">1000L</span>)<span class="comment">//让主线程等待协程结束</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>block - 闭包方法体，定义协程内需要执行的操作</p>
+</li>
+<li><p>Job - 协程构建函数的返回值，可以把 Job 看成协程对象本身，协程的操作方法都在 Job 身上了</p>
+<p>Job对象的相关函数：</p>
+<blockquote>
+<p>job.start ( )      - 启动协程，除lazy模式，协程都不需要手动启动</p>
+<p>job.join ( )        -   等待协程执行完毕，注意：join函数只能在协程中使用</p>
+<p>job.cancel ( )    - 取消这个协程</p>
+<p>job.cancelAndJoin ( )  - 等待协程执行完毕然后再取消</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h4 id="带返回值的协程——GlobalScope-async"><a href="#带返回值的协程——GlobalScope-async" class="headerlink" title="带返回值的协程——GlobalScope.async"></a><strong>带返回值的协程——GlobalScope.async</strong></h4></li>
+</ul>
+<p>  async与launch的区别是async是有返回值的，创建新的协程，默认运行在后台新的线程中，并且不堵塞当前线程，支持通过await获取返回值</p>
+<blockquote>
+<p><strong>注：async需要运行在launch协程或者runBlocking中</strong>，</p>
+<p><strong>async 返回的是 Deferred 类型，Deferred 继承自 Job 接口，Job有的它都有，增加了一个方法 await ，这个方法接收的是 async 闭包中返回的值，async 的特点是不会阻塞当前线程，但会阻塞所在协程，也就是挂起</strong></p>
+</blockquote>
+  <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">runBlocking &#123;<span class="comment">//堵塞当前线程以确保协程运行结束，下文会详细讲</span></span><br><span class="line">        <span class="keyword">val</span> deferred = GlobalScope.async &#123;</span><br><span class="line">            <span class="keyword">return</span><span class="symbol">@async</span> <span class="string">"I am async End!"</span><span class="comment">//通过标签的形式返回值</span></span><br><span class="line">        &#125;</span><br><span class="line">        print(deferred.await())<span class="comment">//采用await进行输出返回值</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<ul>
+<li><h4 id="runBlocking——阻塞当前线程的协程"><a href="#runBlocking——阻塞当前线程的协程" class="headerlink" title="runBlocking——阻塞当前线程的协程"></a><strong>runBlocking</strong>——阻塞当前线程的协程</h4><p>​        在进行launch的时候我们需要用sleep来阻塞主线程来等待协程结束，这样无疑会增加一下不必要的工作，而runBlocking可以阻塞当前线程，让线程等待协程运行结束后才会继续运行。这就类似在协程之后加了一个 Thread.sleep()</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">runBlocking &#123;</span><br><span class="line">        print(<span class="string">"I am runBlocking"</span>)</span><br><span class="line">&#125;</span><br><span class="line">print(<span class="string">"over"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<p>​            </p>
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>伞</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/" title="kotlin协程学习">https://farewell12345.github.io/2020/07/26/kotlin%E5%8D%8F%E7%A8%8B%E5%AD%A6%E4%B9%A0/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless stating additionally.</li></ul></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/farewell12345.github.io/2020/07/27/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" rel="prev" title="深度优先搜索"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">深度优先搜索</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/farewell12345.github.io/2020/07/20/%E6%9D%A5%E7%94%A8python%E5%88%9B%E9%80%A0%E4%B8%80%E4%B8%AA%E8%80%81%E5%A9%86/" rel="next" title="来用python创造一个女朋友"><span class="post-nav-text">来用python创造一个女朋友</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" href="https://github.com/farewell12345/farewell12345.github.io/issues?q=is:issue+kotlin协程学习" target="_blank" rel="noopener">GitHub Issues</a></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2020 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 伞</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v4.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.9.6</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  window.setTimeout(blog_live_time, 1000);
+  const start = new Date('2019-10-12T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div><div id="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv" title="Total Visitors"><span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-user-line"></use></svg></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="Total Views"><span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-eye-line"></use></svg></span><span id="busuanzi_value_site_pv"></span></span></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><div class="aplayer no-destroy" id="aplayer" data-id="308168565" data-server="netease" data-type="playlist" data-fixed="true" data-theme="#0078E7" data-loop="all" data-order="list" data-preload="auto" data-volume="0.7" data-mutex data-lrctype="0" data-listmaxheight="300px" data-storagename="metingjs"></div></div><script defer src="/farewell12345.github.io/js/utils.js"></script><script defer src="/farewell12345.github.io/js/hexo-theme-yun.js"></script></body></html>
