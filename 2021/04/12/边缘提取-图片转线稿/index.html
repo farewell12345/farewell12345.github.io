@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/04/12/wpBqePcGD8OmKxr.jpg">
 <meta property="og:image" content="https://i.loli.net/2021/04/12/EZjAFvkiQNt5pCT.png">
 <meta property="article:published_time" content="2021-04-12T06:37:12.000Z">
-<meta property="article:modified_time" content="2021-04-12T07:54:12.541Z">
+<meta property="article:modified_time" content="2021-04-12T08:07:57.753Z">
 <meta property="article:author" content="Umb">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="机器学习">
@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1618214057710">
+  <link rel="stylesheet" href="/css/style.css?v=1618214883123">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -136,7 +136,7 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月12日</a>
-    <a><i class="nexmoefont icon-areachart"></i>1,027 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>1,014 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
 </div>
 
@@ -158,16 +158,13 @@
   <article>
     <p>一种提取图片边缘的算法</p>
 <span id="more"></span>
-
 <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>突发奇想利用边缘提取做了一个图片转线稿的小程序</p>
 <p>先来看一下效果：</p>
-<img src="https://i.loli.net/2021/04/12/wpBqePcGD8OmKxr.jpg" style="zoom: 50%;" />
-
-<img src="https://i.loli.net/2021/04/12/EZjAFvkiQNt5pCT.png" style="zoom:50%;" />
-
+<p><img src="https://i.loli.net/2021/04/12/wpBqePcGD8OmKxr.jpg" style="zoom: 50%;" /></p>
+<p><img src="https://i.loli.net/2021/04/12/EZjAFvkiQNt5pCT.png" style="zoom:50%;" /></p>
 <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>Python 3.8 、PIL、numpy</p>
 <p>直接使用pip install 安装即可</p>
-<pre><code class="python">pip install pillow
+<pre><code class="lang-python">pip install pillow
 pip install numpy
 </code></pre>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>众所周知，我们所看到的图片是一副二维图片，由一堆RGB色值各不相同的像素点构成。</p>
@@ -186,14 +183,17 @@ pip install numpy
 <li><h4 id="光源设置"><a href="#光源设置" class="headerlink" title="光源设置"></a>光源设置</h4><p>这个需要进行调参了，光源的位置是一个很玄学的问题，位置不同，最后的效果也完全不一样。</p>
 <p>个人觉得光源的最佳位置是与平面俯视角（即z轴与平面的夹角）呈 α =（pi / 2.2 ）°，平面方向角（即x与y的夹角呈β =（pi / 4 ）°，这个角度下提取到的线稿最为清晰。</p>
 </li>
-<li><h4 id="三维梯度转二维灰度"><a href="#三维梯度转二维灰度" class="headerlink" title="三维梯度转二维灰度"></a>三维梯度转二维灰度</h4><p>最后我们需要的是二维矩阵而不是三维矩阵，因此分别求平面各点在xy平面、xz平面、yz平面的投影<br>$$<br>D_{x},D_{y},D_{z}<br>$$<br>将三个方向的投影的值相加的和与原色相乘，也就是（灰度化）<br>$$<br>(D_{x}+D_{y}+D_{z})*255<br>$$</p>
-</li>
+<li><h4 id="三维梯度转二维灰度"><a href="#三维梯度转二维灰度" class="headerlink" title="三维梯度转二维灰度"></a>三维梯度转二维灰度</h4><p>最后我们需要的是二维矩阵而不是三维矩阵，因此分别求平面各点在xy平面、xz平面、yz平面的投影</p>
+<script type="math/tex; mode=display">
+D_{x},D_{y},D_{z}</script><p>将三个方向的投影的值相加的和与原色相乘，也就是（灰度化）</p>
+<script type="math/tex; mode=display">
+(D_{x}+D_{y}+D_{z})*255</script></li>
 <li><h4 id="极值处理"><a href="#极值处理" class="headerlink" title="极值处理"></a>极值处理</h4><p>将处理后的图像进行极值处理，RGB值靠近黑色（0）的归为黑色，靠近白色（255）的归为白色，突出边缘。</p>
 </li>
 <li><h4 id="锐化处理"><a href="#锐化处理" class="headerlink" title="锐化处理"></a>锐化处理</h4><p>为了让我们最后的线稿更加清晰，可以对处理后的图片进行一定程度的锐化操作</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1></li>
 </ol>
-<pre><code class="python">#:param: img PIL.Image对象
+<pre><code class="lang-python">#:param: img PIL.Image对象
 def img_ege(img):
      img_np_array = np.asarray(img).astype(&#39;float&#39;)
      depth = 10.  # 放大深度值
@@ -279,7 +279,7 @@ gitment.render('gitment')
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1618214057711"></script>
+<script src="/js/app.js?v=1618214883125"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -295,6 +295,21 @@ gitment.render('gitment')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 
 </html>
