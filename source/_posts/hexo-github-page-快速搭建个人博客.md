@@ -2,7 +2,7 @@
 title: Hexo + github Page 快速搭建个人博客
 date: 2021-04-12 20:13:23
 tags: Hexo
-cover: https://i.loli.net/2021/04/12/DaEkMR9SNBKFfV8.png
+cover: https://i.loli.net/2021/10/11/zO4UDdEJrLvKWAC.jpg
 mathjax: true
 ---
 
@@ -153,6 +153,7 @@ git push origin master
 
 push成功以后，等一会去查看github仓库是否有了我们push上去的东西，如果有，那就可以去试着访问https://username.github.io（就是刚才在**Repository name** 的位置填写的域名）了，如果出现了界面，那就说明博客成功了
 
-![](https://i.loli.net/2021/04/12/xvni69PqEBIQg8a.png)
+![](https://i.loli.net/2021/10/11/b5Yqy8RLKEJpz6U.png)
 
 <h4>如果配置的过程中遇到未知错误，请记住搜索引擎是个好东西（</h4>
+
