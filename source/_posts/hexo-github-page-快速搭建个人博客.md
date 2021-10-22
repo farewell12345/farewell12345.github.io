@@ -1,7 +1,7 @@
 ---
 title: Hexo + github Page 快速搭建个人博客
 date: 2021-04-12 20:13:23
-tags: Hexo
+tags: [Hexo,blog]
 cover: https://i.loli.net/2021/10/11/zO4UDdEJrLvKWAC.jpg
 mathjax: true
 ---
