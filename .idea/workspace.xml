@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="706aa611-1c93-4a68-a37b-747fdb90d195" name="Default Changelist" comment="lala">
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/gitalk-403以及Error-Validation-Failed问题解决.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/gitalk-403以及Error-Validation-Failed问题解决.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/hexo-github-page-快速搭建个人博客.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/hexo-github-page-快速搭建个人博客.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/基于gitalk搭建博客评论.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/基于gitalk搭建博客评论.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/_posts/边缘提取-图片转线稿.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/_posts/边缘提取-图片转线稿.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/source/about.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-nexmoe" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-nexmoe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-nexmoe/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-nexmoe/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-nexmoe/layout/_partial/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-nexmoe/layout/_partial/header.ejs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/themes/hexo-theme-nexmoe" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProjectId" id="1zrdLE5p5otMHn81zLHm6yn4dfz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/TempDemo/TempDemo/Rocket/web/vue-cli3.0-vueadmin" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="706aa611-1c93-4a68-a37b-747fdb90d195" name="Default Changelist" comment="" />
+      <created>1634910082272</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634910082272</updated>
+      <workItem from="1634910083629" duration="814000" />
+      <workItem from="1635149263483" duration="92000" />
+      <workItem from="1636122792737" duration="2000" />
+      <workItem from="1638883764672" duration="7000" />
+      <workItem from="1639123430882" duration="4000" />
+      <workItem from="1640447123743" duration="14000" />
+      <workItem from="1641229981309" duration="37000" />
+      <workItem from="1641783212848" duration="59000" />
+    </task>
+    <task id="LOCAL-00001" summary="lala">
+      <created>1634910548823</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634910548823</updated>
+    </task>
+    <task id="LOCAL-00002" summary="lala">
+      <created>1635149302930</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1635149302930</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="bolgSource" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lala" />
+    <option name="LAST_COMMIT_MESSAGE" value="lala" />
+  </component>
+</project>

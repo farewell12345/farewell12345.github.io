@@ -23,6 +23,7 @@ permalink: PY.html
 - [![rainchain](https://gravatar.loli.net/avatar/f7e8af6d341b76ad3de6757a8f86f2b4?d=mp&v=1.3.10)](https://rainchan.win/link/ "RainChan")
 - [![rainchain](https://gravatar.loli.net/avatar/d365f26fa25553d5b03b60ab10f35602)](https://gaein.cn "Gaein nidb")
 - [![李岸泽](https://i.loli.net/2021/08/16/YnwRNkOLftTreiP.png)](https://laz-0825.github.io/ "小心LAZ")
+- [![李岸泽](https://water-boiled-fish.github.io/images/user.png)](https://water-boiled-fish.github.io/ "花花")
 
 # 我的老婆
 
