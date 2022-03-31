@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="一种提取图片边缘的算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="边缘提取---图片转线稿">
+<meta property="og:url" content="https://farewell12345.github.io/2021/04/12/%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96-%E5%9B%BE%E7%89%87%E8%BD%AC%E7%BA%BF%E7%A8%BF/index.html">
+<meta property="og:site_name" content="UmbのBlog">
+<meta property="og:description" content="一种提取图片边缘的算法">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/10/11/e9G2JMzf1ilEcKB.png">
+<meta property="article:published_time" content="2021-04-12T06:37:12.000Z">
+<meta property="article:modified_time" content="2022-03-18T08:05:53.707Z">
+<meta property="article:author" content="Umb">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/11/e9G2JMzf1ilEcKB.png"><title>边缘提取---图片转线稿 | UmbのBlog</title><link ref="canonical" href="https://farewell12345.github.io/2021/04/12/%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96-%E5%9B%BE%E7%89%87%E8%BD%AC%E7%BA%BF%E7%A8%BF/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">边缘提取---图片转线稿</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-03-18</span></span></div></header><div class="post-body"><p>一种提取图片边缘的算法</p>
+<span id="more"></span>
+
+        <h1 id="起源"   >
+          <a href="#起源" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#起源">#</a> 起源</h1>
+      
+<p>突发奇想利用边缘提取做了一个图片转线稿的小程序</p>
+<p>先来看一下效果：</p>
+<img src="https://i.loli.net/2021/10/11/e9G2JMzf1ilEcKB.png" style="zoom: 50%;" />
+
+        <h1 id="环境"   >
+          <a href="#环境" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#环境">#</a> 环境</h1>
+      
+<p>Python 3.8 、PIL、numpy</p>
+<p>直接使用 pip install 安装即可</p>
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><div class="table-container"><table><tr><td data-num="1"></td><td><pre>pip install pillow</pre></td></tr><tr><td data-num="2"></td><td><pre>pip install numpy</pre></td></tr></table></div></figure>
+        <h1 id="思路"   >
+          <a href="#思路" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#思路">#</a> 思路</h1>
+      
+<p>众所周知，我们所看到的图片是一副二维图片，由一堆 RGB 色值各不相同的像素点构成。</p>
+<p>那么我们可以将各个像素点的<strong> RGB 色值转变为图片的第三维度</strong>，这样图片就由二维平面图变为了三维立体图。</p>
+<p>此时我们将这张图片<strong>看作一个实实在在的三维物体</strong>，三维物体表面某点高度由对应二维平面的像素点的 RGB 色值决定，RGB 色值有大有小，自然三维物体<strong>表面就会有高低起伏</strong>。</p>
+<p>在某个高度，某个方向上<strong>添加一个点光源照射这个物体</strong>，在光的照射下，物体凹凸不平的表面自然而然就会出现阴影（RGB 色值变化越大的地方表面越陡，阴影越深），再<strong>将这些阴影投影回二维平面</strong>，这样就得到了图片的边缘。</p>
+
+        <h1 id="实现"   >
+          <a href="#实现" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#实现">#</a> 实现</h1>
+      
+<ol>
+<li>
+
+        <h4 id="将原图转为灰度图"   >
+          <a href="#将原图转为灰度图" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#将原图转为灰度图">#</a> 将原图转为灰度图</h4>
+      
+<p>为了简化矩阵，提高运算速度，我们对图像进行灰度图转换</p>
+</li>
+<li>
+
+        <h4 id="使用高斯滤波进行降噪"   >
+          <a href="#使用高斯滤波进行降噪" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#使用高斯滤波进行降噪">#</a> 使用高斯滤波进行降噪</h4>
+      
+<p>这个算法对噪点很敏感（你想想平地上突然隆起一个笔直的擎天柱是不是显得特别扎眼）去除噪点影响，方法为使用高斯滤波，使图像模糊，然后使用领域降噪对图像进行降噪处理</p>
+</li>
+<li>
+
+        <h4 id="计算图像梯度"   >
+          <a href="#计算图像梯度" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#计算图像梯度">#</a> 计算图像梯度</h4>
+      
+<p>numpy 自带矩阵梯度计算 (np.gradient)，该梯度用来作为图像升维参考，梯度值越大，说明图像颜色在该点变化率越大，对应的虚拟深度应该也越大。</p>
+</li>
+<li>
+
+        <h4 id="赋予图像虚拟深度"   >
+          <a href="#赋予图像虚拟深度" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#赋予图像虚拟深度">#</a> 赋予图像虚拟深度</h4>
+      
+<p>因为图像中的 RGB 值有大有小，直接作为三维高度并不合适，需要经过一些权衡计算来将其转变为三维高度，我们这里结合图像梯度和颜色向量来计算，并预设一个放大深度值，用来放大深度效果。</p>
+</li>
+<li>
+
+        <h4 id="光源设置"   >
+          <a href="#光源设置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#光源设置">#</a> 光源设置</h4>
+      
+<p>这个需要进行调参了，光源的位置是一个很玄学的问题，位置不同，最后的效果也完全不一样。</p>
+<p>个人觉得光源的最佳位置是与平面俯视角（即 z 轴与平面的夹角）呈 α =（pi / 2.2 ）°，平面方向角（即 x 与 y 的夹角呈 β =（pi / 4 ）°，这个角度下提取到的线稿最为清晰。</p>
+</li>
+<li>
+
+        <h4 id="三维梯度转二维灰度"   >
+          <a href="#三维梯度转二维灰度" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#三维梯度转二维灰度">#</a> 三维梯度转二维灰度</h4>
+      
+<p>最后我们需要的是二维矩阵而不是三维矩阵，因此分别求平面各点在 xy 平面、xz 平面、yz 平面的投影</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>D</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>D</mi><mi>y</mi></msub><mo separator="true">,</mo><msub><mi>D</mi><mi>z</mi></msub></mrow><annotation encoding="application/x-tex">D_{x},D_{y},D_{z}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>将三个方向的投影的值相加的和与原色相乘，也就是（灰度化）</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>D</mi><mi>x</mi></msub><mo>+</mo><msub><mi>D</mi><mi>y</mi></msub><mo>+</mo><msub><mi>D</mi><mi>z</mi></msub><mo stretchy="false">)</mo><mo>∗</mo><mn>255</mn></mrow><annotation encoding="application/x-tex">(D_{x}+D_{y}+D_{z})*255
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">y</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">5</span><span class="mord">5</span></span></span></span></span></p>
+</li>
+<li>
+
+        <h4 id="极值处理"   >
+          <a href="#极值处理" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#极值处理">#</a> 极值处理</h4>
+      
+<p>将处理后的图像进行极值处理，RGB 值靠近黑色（0）的归为黑色，靠近白色（255）的归为白色，突出边缘。</p>
+</li>
+<li>
+
+        <h4 id="锐化处理"   >
+          <a href="#锐化处理" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#锐化处理">#</a> 锐化处理</h4>
+      
+<p>为了让我们最后的线稿更加清晰，可以对处理后的图片进行一定程度的锐化操作</p>
+
+        <h1 id="代码"   >
+          <a href="#代码" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码">#</a> 代码</h1>
+      
+</li>
+</ol>
+<pre><code># 领域降噪
+def calculate_noise_count(img_obj, w, h, width, height):
+    count = 0
+    for _w_ in [w - 1, w, w + 1]:
+        for _h_ in [h - 1, h, h + 1]:
+            if _w_ &gt; width - 1:
+                continue
+            if _h_ &gt; height - 1:
+                continue
+            if _w_ == w and _h_ == h:
+                continue
+            if img_obj[_w_, _h_] &lt; 230:  # 这里因为是灰度图像，设置小于230为非白色
+                count += 1
+    return count
+
+
+# 高斯滤波+锐化+领域降噪的线稿提取方案
+def img_ege_get(byte: bytes):
+    time = datetime.now()
+    byte_stream = io.BytesIO(byte)
+    im1 = Image.open(byte_stream).convert('L') # 灰度图
+    im = im1.filter(ImageFilter.GaussianBlur(radius=0.75)) # 高斯模糊 75%
+
+    a = np.asarray(im).astype('float')
+
+    depth = 10. # 设定虚拟深度
+    grad = np.gradient(a)
+    grad_x, grad_y = grad
+    grad_x = grad_x * depth / 100.
+    grad_y = grad_y * depth / 100.
+    # 梯度向量计算
+    A = np.sqrt(grad_x ** 2 + grad_y ** 2 + 1.)
+    uni_x = grad_x / A
+    uni_y = grad_y / A
+    uni_z = 1. / A
+    vec_el = np.pi / 2.2
+    vec_az = np.pi / 4.
+    dx = np.cos(vec_el) * np.cos(vec_az)
+    dy = np.cos(vec_el) * np.sin(vec_az)
+    dz = np.sin(vec_el)
+
+    b = 255 * (dx * uni_x + dy * uni_y + dz * uni_z)
+    b = b.clip(0, 255)  # 二值化处理，要么为0，（黑色边缘）要么为255（白色背景）
+    im2 = Image.fromarray(b.astype('uint8'))
+    im2 = im2.filter(ImageFilter.SHARPEN)
+    weight, height = im2.size
+    # 降噪
+    pim = im2.load()
+    map(row_noise, [(pim, height, weight, w,) for w in range(weight)])
+    imgByteArray = io.BytesIO()
+    im2.save(imgByteArray, format='png')
+    imgByteArray = imgByteArray.getvalue()
+    print(datetime.now() - time)
+    return imgByteArray
+
+# 领域降噪
+def row_noise(pim, height, weight, w):
+    for h in range(height):
+        if calculate_noise_count(pim, w, h, weight, height) &lt; 4:
+            pim[w, h] = 255
+</code></pre>
+
+        <h1 id="源码地址"   >
+          <a href="#源码地址" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#源码地址">#</a> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/farewell12345/FAQ-Bot-QQ/tree/master/src/main/Python" >源码地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></h1>
+      
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://farewell12345.github.io">Umb</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://farewell12345.github.io/2021/04/12/%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96-%E5%9B%BE%E7%89%87%E8%BD%AC%E7%BA%BF%E7%A8%BF/">https://farewell12345.github.io/2021/04/12/%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96-%E5%9B%BE%E7%89%87%E8%BD%AC%E7%BA%BF%E7%A8%BF/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://farewell12345.github.io/tags/python/">python</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://farewell12345.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/04/12/hexo-github-page-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Hexo + github Page 快速搭建个人博客</span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%B7%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">
+           起源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">
+           环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text">
+           思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">
+           实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%8E%9F%E5%9B%BE%E8%BD%AC%E4%B8%BA%E7%81%B0%E5%BA%A6%E5%9B%BE"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">
+           将原图转为灰度图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2%E8%BF%9B%E8%A1%8C%E9%99%8D%E5%99%AA"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">
+           使用高斯滤波进行降噪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%83%8F%E6%A2%AF%E5%BA%A6"><span class="toc-number">4.0.0.3.</span> <span class="toc-text">
+           计算图像梯度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%8B%E4%BA%88%E5%9B%BE%E5%83%8F%E8%99%9A%E6%8B%9F%E6%B7%B1%E5%BA%A6"><span class="toc-number">4.0.0.4.</span> <span class="toc-text">
+           赋予图像虚拟深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%89%E6%BA%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.0.0.5.</span> <span class="toc-text">
+           光源设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E6%A2%AF%E5%BA%A6%E8%BD%AC%E4%BA%8C%E7%BB%B4%E7%81%B0%E5%BA%A6"><span class="toc-number">4.0.0.6.</span> <span class="toc-text">
+           三维梯度转二维灰度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%81%E5%80%BC%E5%A4%84%E7%90%86"><span class="toc-number">4.0.0.7.</span> <span class="toc-text">
+           极值处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%90%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">4.0.0.8.</span> <span class="toc-text">
+           锐化处理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">
+           代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-number">6.</span> <span class="toc-text">
+           源码地址</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://i.loli.net/2021/10/11/T17NukYOD6jVS4g.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">暖阳光影，兀自沉溺</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/farewell12345" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/39062268" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a><a class="sidebar-ov-social-item" href="mailto:i@umb.ink" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">mail</span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">Archives</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">Categories</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Umb All Rights Reserved</span><span class="footer__devider">|</span><span>晋ICP备2021016998号</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: 'a192af0dd0f906f921c9',
+    clientSecret: 'c409c99bd77b3cf73cded5c313e4dab298b844c2',
+    repo: 'blogtalk',
+    owner: 'farewell12345',
+    admin: ['farewell12345'],
+    distractionFreeMode: 'false',
+    language: 'en'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

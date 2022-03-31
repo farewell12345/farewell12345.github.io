@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="# 起因        搭建好了个人博客，为了能够与沙雕网友在博客里愉快吹逼，需要开一个评论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于gitalk搭建博客评论">
+<meta property="og:url" content="https://farewell12345.github.io/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/index.html">
+<meta property="og:site_name" content="UmbのBlog">
+<meta property="og:description" content="# 起因        搭建好了个人博客，为了能够与沙雕网友在博客里愉快吹逼，需要开一个评论">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/10/21/E13woviRhL8cdSH.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/21/bBEZzhP5TvHpaxo.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/21/StJjKEZe4DcmU7Q.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/21/32ZzMywVvlUcXQ9.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/21/EjRYfImGpcwPdug.png">
+<meta property="article:published_time" content="2021-10-19T09:07:14.000Z">
+<meta property="article:modified_time" content="2022-01-17T07:35:10.133Z">
+<meta property="article:author" content="Umb">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/21/E13woviRhL8cdSH.png"><title>基于gitalk搭建博客评论 | UmbのBlog</title><link ref="canonical" href="https://farewell12345.github.io/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">基于gitalk搭建博客评论</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-01-17</span></span></div></header><div class="post-body">
+        <h1 id="起因"   >
+          <a href="#起因" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#起因">#</a> 起因</h1>
+      
+<p>搭建好了个人博客，为了能够与沙雕网友在博客里愉快吹逼，需要开一个评论</p>
+<span id="more"></span>
+
+        <h1 id="步骤"   >
+          <a href="#步骤" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#步骤">#</a> 步骤</h1>
+      
+<p>这里选用使用人数最多的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk" > gitalk</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h2 id="1-npm安装"   >
+          <a href="#1-npm安装" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#1-npm安装">#</a> 1. npm 安装</h2>
+      
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><div class="table-container"><table><tr><td data-num="1"></td><td><pre><span class="token function">npm</span> i --save gitalk</pre></td></tr></table></div></figure>
+        <h2 id="2-创建github-application"   >
+          <a href="#2-创建github-application" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#2-创建github-application">#</a> 2. 创建 Github Application</h2>
+      
+<p>创建一个 GithubApplication，可以<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/settings/applications/new" >点这里创建</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p><img src="https://i.loli.net/2021/10/21/E13woviRhL8cdSH.png" alt=""></p>
+<blockquote>
+<p><strong>字段说明</strong>：</p>
+<p>​	Application name：应用名称，叫啥都行，可以叫 BlogTalk 方便区分</p>
+<p>​	Homepage URL：你的博客的链接，如果没有配域名的话就是 https://&lt;githubname&gt;.github.io</p>
+<p>​	Application description: 应用描述，随便写</p>
+<p>​	Authorization callback URL:  验证回调地址，同 HomePageURL</p>
+</blockquote>
+
+        <h2 id="3-查看clientid和clientsecret"   >
+          <a href="#3-查看clientid和clientsecret" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#3-查看clientid和clientsecret">#</a> 3. 查看 clientID 和 clientSecret</h2>
+      
+<p>到 Github 首页，点击个人头像 -&gt;settings-&gt;Developer settings-&gt;OAuth Apps-&gt; 刚才创建的应用</p>
+<p><img src="https://i.loli.net/2021/10/21/bBEZzhP5TvHpaxo.png" alt=""></p>
+<p><img src="https://i.loli.net/2021/10/21/StJjKEZe4DcmU7Q.png" alt=""></p>
+<p>如图就是 ClientID，点击 Generate a new client secret 可查看 Client secrets</p>
+<p><img src="https://i.loli.net/2021/10/21/32ZzMywVvlUcXQ9.png" alt=""></p>
+
+        <h2 id="4-创建一个github仓库用来存储评论"   >
+          <a href="#4-创建一个github仓库用来存储评论" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#4-创建一个github仓库用来存储评论">#</a> 4. 创建一个 github 仓库用来存储评论</h2>
+      
+<p>随便新建一个仓库，注意设为 Public 即可</p>
+
+        <h2 id="5-配置"   >
+          <a href="#5-配置" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#5-配置">#</a> 5. 配置</h2>
+      
+<p><img src="https://i.loli.net/2021/10/21/EjRYfImGpcwPdug.png" alt=""></p>
+<p>找到博客主体的配置文件中关于 gitalk 的配置（如果博客没有可以参考<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，自己魔改一番）（如果不想改，建议换主题）</p>
+<p>由此，gitalk 便配置完成了，编译部署之后即可查看效果</p>
+
+        <h1 id="番外配置代理"   >
+          <a href="#番外配置代理" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#番外配置代理">#</a> 番外：配置代理</h1>
+      
+<p>在某些情况下可能会出现 gitalk 无法正常工作，报 403、Netword Error 等情况，这些情况只需要配置一个代理即可，解决方法可以参考<a href="https://farewell12345.github.io/2021/10/19/gitalk-403%E4%BB%A5%E5%8F%8AError-Validation-Failed%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">另一篇文章</a></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://farewell12345.github.io">Umb</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://farewell12345.github.io/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/">https://farewell12345.github.io/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://farewell12345.github.io/tags/blog/">blog</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/10/19/gitalk-403%E4%BB%A5%E5%8F%8AError-Validation-Failed%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">gitalk 403、Error_Validation_Failed以及Network Error问题解决</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/04/12/hexo-github-page-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="paginator-prev__text">Hexo + github Page 快速搭建个人博客</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="gitalk-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">
+           起因</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">
+           步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-npm%E5%AE%89%E8%A3%85"><span class="toc-number">2.1.</span> <span class="toc-text">
+           1. npm 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BAgithub-application"><span class="toc-number">2.2.</span> <span class="toc-text">
+           2. 创建 Github Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9F%A5%E7%9C%8Bclientid%E5%92%8Cclientsecret"><span class="toc-number">2.3.</span> <span class="toc-text">
+           3. 查看 clientID 和 clientSecret</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAgithub%E4%BB%93%E5%BA%93%E7%94%A8%E6%9D%A5%E5%AD%98%E5%82%A8%E8%AF%84%E8%AE%BA"><span class="toc-number">2.4.</span> <span class="toc-text">
+           4. 创建一个 github 仓库用来存储评论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text">
+           5. 配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%95%AA%E5%A4%96%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">
+           番外：配置代理</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://i.loli.net/2021/10/11/T17NukYOD6jVS4g.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">暖阳光影，兀自沉溺</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/farewell12345" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/39062268" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a><a class="sidebar-ov-social-item" href="mailto:i@umb.ink" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">mail</span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">Archives</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">Categories</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Umb All Rights Reserved</span><span class="footer__devider">|</span><span>晋ICP备2021016998号</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+  if (!document.getElementById('gitalk-container')) {
+    return;
+  }
+
+  var gitalk = new Gitalk({
+    id: md5(window.location.pathname.slice(1)),
+    clientID: 'a192af0dd0f906f921c9',
+    clientSecret: 'c409c99bd77b3cf73cded5c313e4dab298b844c2',
+    repo: 'blogtalk',
+    owner: 'farewell12345',
+    admin: ['farewell12345'],
+    distractionFreeMode: 'false',
+    language: 'en'
+  });
+  gitalk.render('gitalk-container');
+}
+
+if (false) {
+  loadGitalk();
+} else {
+  window.addEventListener('DOMContentLoaded', loadGitalk, false);
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
