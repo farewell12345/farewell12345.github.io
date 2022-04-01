@@ -27,7 +27,7 @@ cover: https://i.loli.net/2021/10/21/9fRcw8ajYz4WMTU.png
 
 通过和[某位朋友](https://rainchan.win/)线下py,拿到了他自己搭建的一个代理地址
 
-> 或者可以去别的网站打开F12寻找他们的access_token代理地址，比如**[gitalk的官方网站](https://gitalk.github.io/)**
+> 或者可以去别的网站打开F12寻找他们的access_token代理地址，比如[gitalk的官方网站](https://gitalk.github.io/)
 >
 > ![](https://i.loli.net/2021/10/21/HRJPQ8Ntix2EdFV.png)
 

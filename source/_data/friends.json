@@ -1,0 +1,60 @@
+[
+  {
+    "avatar": "https://cdn.jsdelivr.net/gh/dreace/dreace.github.io@master/images/avatar.png",
+    "name": "Drace",
+    "introduction": "Drace先辈",
+    "url": "https://blog.dreace.top/"
+  },
+  {
+    "avatar": "https://avatars.githubusercontent.com/u/51701792?v=4",
+    "name": "AimerNeign",
+    "introduction": "AimerNeignのBlog",
+    "url": "https://aimerneige.com/"
+  },
+  {
+    "avatar": "https://avatars3.githubusercontent.com/u/29891793?s=460&v=4",
+    "name": "木子已",
+    "introduction": "鸢尾花开",
+    "url": "https://ipaper.today/"
+  },
+  {
+      "avatar": "https://gravatar.loli.net/avatar/11804ec6b3178d7f4ada6177d224de2d?s=112&d=mm",
+      "name": "Kenvix",
+      "introduction": "党明先辈",
+      "url": "https://kenvix.com/"
+  },
+  {
+      "avatar": "https://blog.fivezha.cn/img/avatar.png",
+      "name": "fivezha",
+      "introduction": "马扎",
+      "url": "https://blog.fivezha.cn"
+  },{
+      "avatar": "https://gravatar.loli.net/avatar/f7e8af6d341b76ad3de6757a8f86f2b4?d=mp&v=1.3.10",
+      "name": "RainChan",
+      "introduction": "RainChan",
+      "url": "https://rainchan.win/link/"
+  },
+  {
+      "avatar": "https://gravatar.loli.net/avatar/d365f26fa25553d5b03b60ab10f35602",
+      "name": "Gaein nidb",
+      "introduction": "Gaein nidb",
+      "url": "https://gaein.cn"
+  },
+  {
+      "avatar": "https://i.loli.net/2021/08/16/YnwRNkOLftTreiP.png",
+      "name": "LAZ",
+      "introduction": "小心LAZ",
+      "url": "https://laz-0825.github.io/ "
+  },
+  {
+      "avatar": "https://water-boiled-fish.github.io/images/user.png",
+      "name": "花花",
+      "introduction": "花花",
+      "url": "https://water-boiled-fish.github.io/"
+  },{
+      "avatar": "https://pic1.zhimg.com/80/v2-6999caf3dacd879c330521577f59e960_1440w.png",
+      "name": "holk",
+      "introduction": "holk",
+      "url": "https://www.holk.tech/"
+  }
+]
