@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="一种提取图片边缘的算法">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="msvalidate.01" content="869FE5BF3A93E5D669AFDA39B7131689"><meta name="description" content="一种提取图片边缘的算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="边缘提取---图片转线稿">
 <meta property="og:url" content="https://farewell12345.github.io/2021/04/12/%E8%BE%B9%E7%BC%98%E6%8F%90%E5%8F%96-%E5%9B%BE%E7%89%87%E8%BD%AC%E7%BA%BF%E7%A8%BF/index.html">
@@ -7,7 +7,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2021/10/11/e9G2JMzf1ilEcKB.png">
 <meta property="article:published_time" content="2021-04-12T06:37:12.000Z">
-<meta property="article:modified_time" content="2022-03-18T08:05:53.707Z">
+<meta property="article:modified_time" content="2022-04-01T02:27:17.556Z">
 <meta property="article:author" content="Umb">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="机器学习">
@@ -16,7 +16,7 @@
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -36,7 +36,7 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">边缘提取---图片转线稿</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-03-18</span></span></div></header><div class="post-body"><p>一种提取图片边缘的算法</p>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">边缘提取---图片转线稿</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-04-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-04-01</span></span></div></header><div class="post-body"><p>一种提取图片边缘的算法</p>
 <span id="more"></span>
 
         <h1 id="起源"   >
@@ -131,68 +131,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
       
 </li>
 </ol>
-<pre><code># 领域降噪
-def calculate_noise_count(img_obj, w, h, width, height):
-    count = 0
-    for _w_ in [w - 1, w, w + 1]:
-        for _h_ in [h - 1, h, h + 1]:
-            if _w_ &gt; width - 1:
-                continue
-            if _h_ &gt; height - 1:
-                continue
-            if _w_ == w and _h_ == h:
-                continue
-            if img_obj[_w_, _h_] &lt; 230:  # 这里因为是灰度图像，设置小于230为非白色
-                count += 1
-    return count
-
-
-# 高斯滤波+锐化+领域降噪的线稿提取方案
-def img_ege_get(byte: bytes):
-    time = datetime.now()
-    byte_stream = io.BytesIO(byte)
-    im1 = Image.open(byte_stream).convert('L') # 灰度图
-    im = im1.filter(ImageFilter.GaussianBlur(radius=0.75)) # 高斯模糊 75%
-
-    a = np.asarray(im).astype('float')
-
-    depth = 10. # 设定虚拟深度
-    grad = np.gradient(a)
-    grad_x, grad_y = grad
-    grad_x = grad_x * depth / 100.
-    grad_y = grad_y * depth / 100.
-    # 梯度向量计算
-    A = np.sqrt(grad_x ** 2 + grad_y ** 2 + 1.)
-    uni_x = grad_x / A
-    uni_y = grad_y / A
-    uni_z = 1. / A
-    vec_el = np.pi / 2.2
-    vec_az = np.pi / 4.
-    dx = np.cos(vec_el) * np.cos(vec_az)
-    dy = np.cos(vec_el) * np.sin(vec_az)
-    dz = np.sin(vec_el)
-
-    b = 255 * (dx * uni_x + dy * uni_y + dz * uni_z)
-    b = b.clip(0, 255)  # 二值化处理，要么为0，（黑色边缘）要么为255（白色背景）
-    im2 = Image.fromarray(b.astype('uint8'))
-    im2 = im2.filter(ImageFilter.SHARPEN)
-    weight, height = im2.size
-    # 降噪
-    pim = im2.load()
-    map(row_noise, [(pim, height, weight, w,) for w in range(weight)])
-    imgByteArray = io.BytesIO()
-    im2.save(imgByteArray, format='png')
-    imgByteArray = imgByteArray.getvalue()
-    print(datetime.now() - time)
-    return imgByteArray
-
-# 领域降噪
-def row_noise(pim, height, weight, w):
-    for h in range(height):
-        if calculate_noise_count(pim, w, h, weight, height) &lt; 4:
-            pim[w, h] = 255
-</code></pre>
-
+<figure class="highlight python"><figcaption data-lang="python"></figcaption><div class="table-container"><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 领域降噪</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token keyword">def</span> <span class="token function">calculate_noise_count</span><span class="token punctuation">(</span>img_obj<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    count <span class="token operator">=</span> <span class="token number">0</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    <span class="token keyword">for</span> _w_ <span class="token keyword">in</span> <span class="token punctuation">[</span>w <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> w<span class="token punctuation">,</span> w <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">for</span> _h_ <span class="token keyword">in</span> <span class="token punctuation">[</span>h <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> h<span class="token punctuation">,</span> h <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="6"></td><td><pre>            <span class="token keyword">if</span> _w_ <span class="token operator">></span> width <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="7"></td><td><pre>                <span class="token keyword">continue</span></pre></td></tr><tr><td data-num="8"></td><td><pre>            <span class="token keyword">if</span> _h_ <span class="token operator">></span> height <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="9"></td><td><pre>                <span class="token keyword">continue</span></pre></td></tr><tr><td data-num="10"></td><td><pre>            <span class="token keyword">if</span> _w_ <span class="token operator">==</span> w <span class="token keyword">and</span> _h_ <span class="token operator">==</span> h<span class="token punctuation">:</span></pre></td></tr><tr><td data-num="11"></td><td><pre>                <span class="token keyword">continue</span></pre></td></tr><tr><td data-num="12"></td><td><pre>            <span class="token keyword">if</span> img_obj<span class="token punctuation">[</span>_w_<span class="token punctuation">,</span> _h_<span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token number">230</span><span class="token punctuation">:</span>  <span class="token comment"># 这里因为是灰度图像，设置小于 230 为非白色</span></pre></td></tr><tr><td data-num="13"></td><td><pre>                count <span class="token operator">+=</span> <span class="token number">1</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token keyword">return</span> count</pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token comment"># 高斯滤波 + 锐化 + 领域降噪的线稿提取方案</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token keyword">def</span> <span class="token function">img_ege_get</span><span class="token punctuation">(</span>byte<span class="token punctuation">:</span> <span class="token builtin">bytes</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    time <span class="token operator">=</span> datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre>    byte_stream <span class="token operator">=</span> io<span class="token punctuation">.</span>BytesIO<span class="token punctuation">(</span>byte<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="21"></td><td><pre>    im1 <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>byte_stream<span class="token punctuation">)</span><span class="token punctuation">.</span>convert<span class="token punctuation">(</span><span class="token string">'L'</span><span class="token punctuation">)</span> <span class="token comment"># 灰度图</span></pre></td></tr><tr><td data-num="22"></td><td><pre>    im <span class="token operator">=</span> im1<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>ImageFilter<span class="token punctuation">.</span>GaussianBlur<span class="token punctuation">(</span>radius<span class="token operator">=</span><span class="token number">0.75</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 高斯模糊 75%</span></pre></td></tr><tr><td data-num="23"></td><td><pre></pre></td></tr><tr><td data-num="24"></td><td><pre>    a <span class="token operator">=</span> np<span class="token punctuation">.</span>asarray<span class="token punctuation">(</span>im<span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'float'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="25"></td><td><pre></pre></td></tr><tr><td data-num="26"></td><td><pre>    depth <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">.</span> <span class="token comment"># 设定虚拟深度</span></pre></td></tr><tr><td data-num="27"></td><td><pre>    grad <span class="token operator">=</span> np<span class="token punctuation">.</span>gradient<span class="token punctuation">(</span>a<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="28"></td><td><pre>    grad_x<span class="token punctuation">,</span> grad_y <span class="token operator">=</span> grad</pre></td></tr><tr><td data-num="29"></td><td><pre>    grad_x <span class="token operator">=</span> grad_x <span class="token operator">*</span> depth <span class="token operator">/</span> <span class="token number">100</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="30"></td><td><pre>    grad_y <span class="token operator">=</span> grad_y <span class="token operator">*</span> depth <span class="token operator">/</span> <span class="token number">100</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="31"></td><td><pre>    <span class="token comment"># 梯度向量计算</span></pre></td></tr><tr><td data-num="32"></td><td><pre>    A <span class="token operator">=</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>grad_x <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> grad_y <span class="token operator">**</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">.</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="33"></td><td><pre>    uni_x <span class="token operator">=</span> grad_x <span class="token operator">/</span> A</pre></td></tr><tr><td data-num="34"></td><td><pre>    uni_y <span class="token operator">=</span> grad_y <span class="token operator">/</span> A</pre></td></tr><tr><td data-num="35"></td><td><pre>    uni_z <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">.</span> <span class="token operator">/</span> A</pre></td></tr><tr><td data-num="36"></td><td><pre>    vec_el <span class="token operator">=</span> np<span class="token punctuation">.</span>pi <span class="token operator">/</span> <span class="token number">2.2</span></pre></td></tr><tr><td data-num="37"></td><td><pre>    vec_az <span class="token operator">=</span> np<span class="token punctuation">.</span>pi <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">.</span></pre></td></tr><tr><td data-num="38"></td><td><pre>    dx <span class="token operator">=</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>vec_el<span class="token punctuation">)</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>vec_az<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="39"></td><td><pre>    dy <span class="token operator">=</span> np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>vec_el<span class="token punctuation">)</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>vec_az<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="40"></td><td><pre>    dz <span class="token operator">=</span> np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>vec_el<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="41"></td><td><pre></pre></td></tr><tr><td data-num="42"></td><td><pre>    b <span class="token operator">=</span> <span class="token number">255</span> <span class="token operator">*</span> <span class="token punctuation">(</span>dx <span class="token operator">*</span> uni_x <span class="token operator">+</span> dy <span class="token operator">*</span> uni_y <span class="token operator">+</span> dz <span class="token operator">*</span> uni_z<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="43"></td><td><pre>    b <span class="token operator">=</span> b<span class="token punctuation">.</span>clip<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>  <span class="token comment"># 二值化处理，要么为 0，（黑色边缘）要么为 255（白色背景）</span></pre></td></tr><tr><td data-num="44"></td><td><pre>    im2 <span class="token operator">=</span> Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>b<span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'uint8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="45"></td><td><pre>    im2 <span class="token operator">=</span> im2<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>ImageFilter<span class="token punctuation">.</span>SHARPEN<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="46"></td><td><pre>    weight<span class="token punctuation">,</span> height <span class="token operator">=</span> im2<span class="token punctuation">.</span>size</pre></td></tr><tr><td data-num="47"></td><td><pre>    <span class="token comment"># 降噪</span></pre></td></tr><tr><td data-num="48"></td><td><pre>    pim <span class="token operator">=</span> im2<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="49"></td><td><pre>    <span class="token builtin">map</span><span class="token punctuation">(</span>row_noise<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>pim<span class="token punctuation">,</span> height<span class="token punctuation">,</span> weight<span class="token punctuation">,</span> w<span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token keyword">for</span> w <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="50"></td><td><pre>    imgByteArray <span class="token operator">=</span> io<span class="token punctuation">.</span>BytesIO<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="51"></td><td><pre>    im2<span class="token punctuation">.</span>save<span class="token punctuation">(</span>imgByteArray<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">'png'</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="52"></td><td><pre>    imgByteArray <span class="token operator">=</span> imgByteArray<span class="token punctuation">.</span>getvalue<span class="token punctuation">(</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="53"></td><td><pre>    <span class="token keyword">print</span><span class="token punctuation">(</span>datetime<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="54"></td><td><pre>    <span class="token keyword">return</span> imgByteArray</pre></td></tr><tr><td data-num="55"></td><td><pre></pre></td></tr><tr><td data-num="56"></td><td><pre><span class="token comment"># 领域降噪</span></pre></td></tr><tr><td data-num="57"></td><td><pre><span class="token keyword">def</span> <span class="token function">row_noise</span><span class="token punctuation">(</span>pim<span class="token punctuation">,</span> height<span class="token punctuation">,</span> weight<span class="token punctuation">,</span> w<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="58"></td><td><pre>    <span class="token keyword">for</span> h <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>height<span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="59"></td><td><pre>        <span class="token keyword">if</span> calculate_noise_count<span class="token punctuation">(</span>pim<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h<span class="token punctuation">,</span> weight<span class="token punctuation">,</span> height<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="60"></td><td><pre>            pim<span class="token punctuation">[</span>w<span class="token punctuation">,</span> h<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">255</span></pre></td></tr></table></div></figure>
         <h1 id="源码地址"   >
           <a href="#源码地址" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#源码地址">#</a> <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/farewell12345/FAQ-Bot-QQ/tree/master/src/main/Python" >源码地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></h1>
       
@@ -210,7 +149,280 @@ def row_noise(pim, height, weight, w):
            极值处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%90%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">4.0.0.8.</span> <span class="toc-text">
            锐化处理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">
            代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-number">6.</span> <span class="toc-text">
-           源码地址</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://i.loli.net/2021/10/11/T17NukYOD6jVS4g.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">暖阳光影，兀自沉溺</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/farewell12345" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/39062268" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a><a class="sidebar-ov-social-item" href="mailto:i@umb.ink" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">mail</span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">Archives</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">Categories</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">6</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Umb All Rights Reserved</span><span class="footer__devider">|</span><span>晋ICP备2021016998号</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
+           源码地址</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://i.loli.net/2021/10/11/T17NukYOD6jVS4g.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">暖阳光影，兀自沉溺</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/farewell12345" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/39062268" target="_blank" rel="noopener" data-popover="Youtube" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-youtube"></i></span></a><a class="sidebar-ov-social-item" href="mailto:i@umb.ink" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">mail</span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">4</div><div class="sidebar-ov-state-item__name">Archives</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">Categories</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">5</div><div class="sidebar-ov-state-item__name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Umb All Rights Reserved</span><span class="footer__devider">|</span><span>晋ICP备2021016998号</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" rel="stylesheet" type="text/css"><link href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.css" rel="stylesheet" type="text/css"><script src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/copy-tex.min.js"></script><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-md5@latest/src/md5.min.js"></script><script>function loadGitalk () {
   if (!document.getElementById('gitalk-container')) {
     return;
   }
@@ -232,4 +444,4 @@ if (false) {
   loadGitalk();
 } else {
   window.addEventListener('DOMContentLoaded', loadGitalk, false);
-}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
