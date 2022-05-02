@@ -30,95 +30,10 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">一个简易开放平台（RPC）的设计思路</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2022-04-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-05-02</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="起因"   >
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">Categories</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">Tags</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friend/"><span class="header-nav-menu-item__icon"><i class="fas fa-friend"></i></span><span class="header-nav-menu-item__text">友链</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-about"></i></span><span class="header-nav-menu-item__text">About</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">UmbのBlog</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/">一个简易开放平台（RPC）的设计思路</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2022-04-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-05-02</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1 id="起因"   >
           <a href="#起因" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#起因">#</a> 起因</h1>
       
-<p>​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，<s>绝对不是我咕咕咕</s>。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。</p>
-
-        <h1 id="基本构成要素"   >
-          <a href="#基本构成要素" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#基本构成要素">#</a> 基本构成要素</h1>
-      
-<p>一个开放平台以提供 RPC（Remote Procedure Call）远程过程调用服务为主，应该包含以下要素：</p>
-<ol>
-<li>鉴权设计（OAuth1.0、OAuth2.0）</li>
-<li>RPC 服务</li>
-</ol>
-
-        <h1 id="平台定位"   >
-          <a href="#平台定位" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#平台定位">#</a> 平台定位</h1>
-      
-<p>​		开放平台的定位大部分都是 ToB 的，因此需要精准定位客户需求，这里以我设计的互联网虚假信息监测开放平台为例。</p>
-
-        <h2 id="目标群体"   >
-          <a href="#目标群体" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#目标群体">#</a> 目标群体</h2>
-      
-<p>​		要了解客户需求，首先要明确客户到底是哪些人。</p>
-<p>​		显而易见，需要互联网虚假信息监测服务的场景集中于各类社交平台等舆论密集的地方，因此，这种社交平台的开发者和管理者就是我们的目标群体。</p>
-
-        <h2 id="痛点分析"   >
-          <a href="#痛点分析" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#痛点分析">#</a> 痛点分析</h2>
-      
-<p>​		确立了目标群体，那么就要分析这个群体最需要什么，即这个行业中存在的痛点在哪，从痛点着手切入，才能开发出好用的产品。</p>
-<p>在虚假信息监测开放平台中，目标群体的痛点就在于人力审核互联网舆论的高成本、低效率，众所周知，互联网舆论是非常庞大的，要审核起来非常费劲，但是又不能完全放弃管控，<s>你永远不知道用户会搞出什么幺蛾子</s>。</p>
-<p>​		因此，本平台就立足于互联网人力审核成本高、效率低这一痛点上进行构建，平台的核心是监测互联网虚假信息，平台的目标，就是让社交平台的管理人员能够提高舆论审核的工作效率，降低人力成本，将他们从无尽地审核地狱里解放出来。</p>
-
-        <h3 id="结论"   >
-          <a href="#结论" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#结论">#</a> 结论</h3>
-      
-<p>​		至此，我们就完成了第一步，开放平台的目标定位，接下来要做的，就是切入我们上面所分析出的行业痛点，进行平台的概要设计</p>
-
-        <h1 id="概要设计"   >
-          <a href="#概要设计" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#概要设计">#</a> 概要设计</h1>
-      
-<p>​		在这一阶段我们需要完成整体项目的结构梳理，包括架构、功能点。</p>
-
-        <h2 id="需求分析"   >
-          <a href="#需求分析" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#需求分析">#</a> 需求分析</h2>
-      
-<p>​		上面我们确立了平台需要致力于解决的痛点，那么接下来我们就需要针对痛点来推断需求，<strong>功能为需求而服务</strong>，因此基于关键痛点进行需求分析是非常重要的一个环节。</p>
-<p>​		针对互联网舆论人力审核成本高、效率低这一痛点，我们可以拆分出多条需求。</p>
-<blockquote>
-<ol>
-<li>
-<p>监测多种虚假信息文本，主要包括谣言、敏感词、营销号三种</p>
-</li>
-<li>
-<p>需要提供自定义化服务，以解决不同平台有不同敏感词监测规范的情况。（<s>比如在 B 站，你所热爱的就是你的生活</s>，在 B 站是违禁词，但在其它地方可不一定是）</p>
-</li>
-<li>
-<p>需要为接入的平台提供数据可视化服务，以方便用户查看各类虚假信息的趋势，更好地制定舆论管控规则</p>
-</li>
-<li>
-<p>要有容易上手的接口设计和详细的说明文档，防止用户看完一头雾水，依然不会用</p>
-</li>
-<li>
-<p>稳定可靠的服务支持，毫无疑问一个社交平台的信息量是非常恐怖的，因此我们的平台必须具有极高的稳定性，要能够抗住非常恐怖的流量才可以</p>
-</li>
-</ol>
-</blockquote>
-
-        <h2 id="功能设计"   >
-          <a href="#功能设计" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#功能设计">#</a> 功能设计</h2>
-      
-<p>​		有了明确的需求，就可以针对需求来设计功能了，我们从上面的五条需求展开来设计功能</p>
-
-        <h4 id="1-虚假信息文本监测"   >
-          <a href="#1-虚假信息文本监测" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#1-虚假信息文本监测">#</a> 1. 虚假信息文本监测</h4>
-      
-<p>​		针对于虚假信息文本监测的需求，我们以提供 RPC 接口的方式为用户提供云端虚假信息监测服务，身份校验采用 OAuth1.0 原则（因为简单，现在应该使用 2.0），通过签发令牌的方式来实现。</p>
-<p>​		鉴于需要至少实现三种不同的舆论识别，也即谣言、敏感词、营销号，所以我们需要提供三套不同的 RPC 服务，分别就是：谣言监测、敏感词识别、营销文本分类识别。</p>
-
-        <h4 id="2-自定义舆论监测规则"   >
-          <a href="#2-自定义舆论监测规则" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#2-自定义舆论监测规则">#</a> 2. 自定义舆论监测规则</h4>
-      
-<p>​		针对部分平台需要自定义监测规则的需求来说，同样可以使用 RPC 接口的方式为用户提供云端服务，不同与上一点，这个功能下我们需要让用户上传自定义的文件规则。然后后台基于该数据文件，制定适合用户的识别模型。</p>
-
-        <h4 id="3-数据可视化服务"   >
-          <a href="#3-数据可视化服务" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#3-数据可视化服务">#</a> 3. 数据可视化服务</h4>
-      
-<p>​		舆论的实时情况统计，统计用户的平台在某个时间段内的虚假信息数量，并展示给用户观看，因此需要后端实现在监测到违法信息时，对其进行一个分类统计的功能，包括在某个时间段内用户所接入平台的谣言舆论数量、带有敏感词监测的舆论数量。</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2022/04/01/LineArt-%E7%BA%BF%E7%A8%BFAPI%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">LineArt-线稿API使用文档</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2022-04-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-04-05</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>将之前写的线稿算法部署了一下</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2022/04/01/LineArt-%E7%BA%BF%E7%A8%BFAPI%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/19/gitalk-403%E4%BB%A5%E5%8F%8AError-Validation-Failed%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">gitalk 403、Error_Validation_Failed以及Network Error问题解决</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-03-31</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1 id="问题起源"   >
+<p>​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，<s>绝对不是我咕咕咕</s>。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2022/04/01/LineArt-%E7%BA%BF%E7%A8%BFAPI%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/">LineArt-线稿API使用文档</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2022-04-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-04-05</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>将之前写的线稿算法部署了一下</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2022/04/01/LineArt-%E7%BA%BF%E7%A8%BFAPI%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/19/gitalk-403%E4%BB%A5%E5%8F%8AError-Validation-Failed%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">gitalk 403、Error_Validation_Failed以及Network Error问题解决</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-03-31</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1 id="问题起源"   >
           <a href="#问题起源" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#问题起源">#</a> 问题起源</h1>
       
 <p>在配置 gitalk 评论后，会出现 403 报错、Netword Error 和 Error_Validation_Failed 等问题而导致 gitalk 无法正常使用，这些问题多半都是因为<strong>缺乏 gitalk 代理</strong>导致的</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2021/10/19/gitalk-403%E4%BB%A5%E5%8F%8AError-Validation-Failed%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/">基于gitalk搭建博客评论</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-10-19</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2022-01-17</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1 id="起因"   >

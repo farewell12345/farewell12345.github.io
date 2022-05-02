@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="msvalidate.01" content="869FE5BF3A93E5D669AFDA39B7131689"><meta name="description" content="# 起因        ​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，绝对不是我咕咕咕。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。                     # 基本构成要素        一个开放平台以提供 RPC（Remote Procedu">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="msvalidate.01" content="869FE5BF3A93E5D669AFDA39B7131689"><meta name="description" content="# 起因        ​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，绝对不是我咕咕咕。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个简易开放平台（RPC）的设计思路">
 <meta property="og:url" content="https://farewell12345.github.io/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/index.html">
 <meta property="og:site_name" content="UmbのBlog">
-<meta property="og:description" content="# 起因        ​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，绝对不是我咕咕咕。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。                     # 基本构成要素        一个开放平台以提供 RPC（Remote Procedu">
+<meta property="og:description" content="# 起因        ​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，绝对不是我咕咕咕。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-04-20T10:26:24.000Z">
-<meta property="article:modified_time" content="2022-05-02T07:27:25.259Z">
+<meta property="article:modified_time" content="2022-05-02T07:29:04.684Z">
 <meta property="article:author" content="Umb">
 <meta property="article:tag" content="后端">
 <meta name="twitter:card" content="summary"><title>一个简易开放平台（RPC）的设计思路 | UmbのBlog</title><link ref="canonical" href="https://farewell12345.github.io/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
@@ -38,6 +38,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
           <a href="#起因" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#起因">#</a> 起因</h1>
       
 <p>​		去年 7 月打计算机程序设计大赛的时候设计了一套互联网虚假信息监测开放平台，本来想着打完比赛就写篇博客，结果比赛越打越多，<s>绝对不是我咕咕咕</s>。最近投实习，暂时闲下来了，分享一下当时的一些设计思路与经验。</p>
+<span id="more"></span>
 
         <h1 id="基本构成要素"   >
           <a href="#基本构成要素" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#基本构成要素">#</a> 基本构成要素</h1>
