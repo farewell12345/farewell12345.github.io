@@ -1,4 +1,5 @@
 https://farewell12345.github.io/2022/05/02/learn-shell/
+https://farewell12345.github.io/2021/04/12/hexo-github-page-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/
 https://farewell12345.github.io/about/index.html
 https://farewell12345.github.io/about/%E9%99%88%E6%98%8A.html
 https://farewell12345.github.io/2022/04/20/%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/
@@ -9,7 +10,6 @@ https://farewell12345.github.io/friend/index.html
 https://farewell12345.github.io/tags/index.html
 https://farewell12345.github.io/categories/index.html
 https://farewell12345.github.io/2021/10/19/%E5%9F%BA%E4%BA%8Egitalk%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/
-https://farewell12345.github.io/2021/04/12/hexo-github-page-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/
 https://farewell12345.github.io/
 https://farewell12345.github.io/tags/%E8%B8%A9%E5%9D%91/
 https://farewell12345.github.io/tags/blog/
